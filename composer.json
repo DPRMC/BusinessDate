@@ -1,0 +1,24 @@
+{
+    "name": "dprmc/business-date",
+    "description": "A PHP library to help with determining business days, including holidays in the United States.",
+    "type": "library",
+    "require": {
+        "nesbot/carbon": "^2.23"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Drennen",
+            "email": "michaeldrennen74@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    }
+}
