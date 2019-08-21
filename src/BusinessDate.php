@@ -153,17 +153,21 @@ class BusinessDate {
      * @return string
      * @throws \Exception
      */
-    public static function getLastBusinessDayOfTheMonth( string $argDate ): string {
-        $date        = date( "Y-m-t", strtotime( $argDate ) );
+    public static function getLastBusinessDayOfTheMonth( string $argDate ) : string {
+        $time = strtotime( $argDate );
+        if( $time === false )
+            throw new \Exception( "Unable to find the last business day of the month for this date: " . $argDate );
+
+        $date = date("Y-m-t", $time );
         $keepLooking = TRUE;
 
         do {
-            if ( self::isWeekday( $date ) && !self::isBankHoliday( $date ) ):
+            if ( self::isWeekday( $date ) && !self::isBankHoliday( $date ) ) :
                 return $date;
             endif;
-            $date = date( 'Y-m-d', strtotime( $date . ' -1 day' ) );
+            $date = date('Y-m-d', strtotime($date . ' -1 day' ) );
         } while ( $keepLooking );
-        throw new \Exception( "Unable to find the last business day of the month for this date: " . $argDate );
+
     }
 
     /**
@@ -208,7 +212,7 @@ class BusinessDate {
 
 
     /**
-     * Given a string to serve as an anchor date, return the business date closes to the offset number of days away.
+     * Given a string to serve as an anchor date, return the business date closest to the offset number of days away.
      * A positive number for the offset goes into the future. Negative number goes into the past.
      * @param string $anchor
      * @param int $offset
