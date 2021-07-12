@@ -166,6 +166,20 @@ class BusinessDate {
         throw new \Exception( "Unable to find the last business day of the month for this date: " . $argDate );
     }
 
+
+    public static function getFirstBusinessDayOfTheMonth( string $argDate ): string {
+        $date        = date( "Y-m-1", strtotime( $argDate ) );
+        $keepLooking = TRUE;
+
+        do {
+            if ( self::isWeekday( $date ) && !self::isBankHoliday( $date ) ):
+                return $date;
+            endif;
+            $date = date( 'Y-m-d', strtotime( $date . ' +1 day' ) );
+        } while ( $keepLooking );
+        throw new \Exception( "Unable to find the first business day of the month for this date: " . $argDate );
+    }
+
     /**
      * Given a string date, this method will return true if the date was a weekend.
      * @see https://www.php.net/manual/en/function.date.php
