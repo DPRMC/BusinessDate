@@ -171,6 +171,11 @@ class BusinessDate {
     }
 
 
+    /**
+     * @param string $argDate
+     * @return string
+     * @throws \Exception
+     */
     public static function getFirstBusinessDayOfTheMonth( string $argDate ): string {
         $date        = date( "Y-m-1", strtotime( $argDate ) );
         $keepLooking = TRUE;
