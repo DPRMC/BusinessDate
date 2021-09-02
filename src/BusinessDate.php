@@ -177,7 +177,7 @@ class BusinessDate {
      * @throws \Exception
      */
     public static function getFirstBusinessDayOfTheMonth( string $argDate ): string {
-        $date        = date( "Y-m-1", strtotime( $argDate ) );
+        $date        = date( "Y-m-01", strtotime( $argDate ) );
         $keepLooking = TRUE;
 
         do {
