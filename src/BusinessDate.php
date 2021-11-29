@@ -54,9 +54,10 @@ class BusinessDate {
             case self::SUNDAY:
                 $bankHolidays[] = "$year-01-02";
                 break;
-            case self::SATURDAY:
-                $bankHolidays[] = "$year-01-03";
-                break;
+                // 2021-11-29:mdd No longer a holiday.
+//            case self::SATURDAY:
+//                $bankHolidays[] = "$year-01-03";
+//                break;
             default:
                 $bankHolidays[] = "$year-01-01";
         endswitch;
@@ -100,9 +101,10 @@ class BusinessDate {
         $bankHolidays[] = $thanksgiving->format( 'Y-m-d' );
 
         // Day after Thanksgiving
-        $di                   = new \DateInterval( 'P1D' );
-        $dayAfterThanksgiving = $thanksgiving->add( $di );
-        $bankHolidays[]       = $dayAfterThanksgiving->format( 'Y-m-d' );
+        // 2021-11-29:mdd - No longer a holiday.
+//        $di                   = new \DateInterval( 'P1D' );
+//        $dayAfterThanksgiving = $thanksgiving->add( $di );
+//        $bankHolidays[]       = $dayAfterThanksgiving->format( 'Y-m-d' );
 
 
         // Christmas:
