@@ -54,9 +54,10 @@ class BusinessDate {
             case self::SUNDAY:
                 $bankHolidays[] = "$year-01-02";
                 break;
-            case self::SATURDAY:
-                $bankHolidays[] = "$year-01-03";
-                break;
+                // 2021-11-29:mdd No longer a holiday.
+//            case self::SATURDAY:
+//                $bankHolidays[] = "$year-01-03";
+//                break;
             default:
                 $bankHolidays[] = "$year-01-01";
         endswitch;
@@ -100,9 +101,10 @@ class BusinessDate {
         $bankHolidays[] = $thanksgiving->format( 'Y-m-d' );
 
         // Day after Thanksgiving
-        $di                   = new \DateInterval( 'P1D' );
-        $dayAfterThanksgiving = $thanksgiving->add( $di );
-        $bankHolidays[]       = $dayAfterThanksgiving->format( 'Y-m-d' );
+        // 2021-11-29:mdd - No longer a holiday.
+//        $di                   = new \DateInterval( 'P1D' );
+//        $dayAfterThanksgiving = $thanksgiving->add( $di );
+//        $bankHolidays[]       = $dayAfterThanksgiving->format( 'Y-m-d' );
 
 
         // Christmas:
@@ -168,6 +170,25 @@ class BusinessDate {
             $date = date('Y-m-d', strtotime($date . ' -1 day' ) );
         } while ( $keepLooking );
 
+    }
+
+
+    /**
+     * @param string $argDate
+     * @return string
+     * @throws \Exception
+     */
+    public static function getFirstBusinessDayOfTheMonth( string $argDate ): string {
+        $date        = date( "Y-m-01", strtotime( $argDate ) );
+        $keepLooking = TRUE;
+
+        do {
+            if ( self::isWeekday( $date ) && !self::isBankHoliday( $date ) ):
+                return $date;
+            endif;
+            $date = date( 'Y-m-d', strtotime( $date . ' +1 day' ) );
+        } while ( $keepLooking );
+        throw new \Exception( "Unable to find the first business day of the month for this date: " . $argDate );
     }
 
     /**
@@ -251,4 +272,8 @@ class BusinessDate {
 
         return $newDate;
     }
+
+
+
+
 }
