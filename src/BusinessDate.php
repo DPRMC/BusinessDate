@@ -292,14 +292,14 @@ class BusinessDate {
         $counter = 0;
         $newDate = $anchor;
         while ( $counter < $offset ):
-            echo "\nCounter: $counter and Offset: $offset and newDate: $newDate\n";
+            //echo "\nCounter: $counter and Offset: $offset and newDate: $newDate\n";
             $newDate = date( 'Y-m-d', strtotime( $offsetDirection . "1 day", strtotime( $anchor ) ) );
             $anchor  = $newDate;
             if ( self::isBusinessDay( $newDate ) ):
-                echo "\n$newDate is A business day, so " . ($counter + 1) . " \n";
+                //echo "\n$newDate is A business day, so " . ($counter + 1) . " \n";
                 $counter++;
             else:
-                echo "\n$newDate is NOT A business day.\n";
+                //echo "\n$newDate is NOT A business day.\n";
                 // So do not increment the counter.
             endif;
         endwhile;
