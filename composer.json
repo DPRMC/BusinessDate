@@ -6,7 +6,7 @@
         "nesbot/carbon": "^2.53|^3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0|^9.0|^10.0|^11.0"
+        "phpunit/phpunit": "^8.0|^9.0|^10.0|^11.0|^12.0"
     },
     "license": "MIT",
     "authors": [
